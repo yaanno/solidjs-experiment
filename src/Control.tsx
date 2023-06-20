@@ -1,13 +1,11 @@
-import { useStore } from "./store";
+import { setSelectedUser } from "./App";
 
 export default function () {
-  // @ts-ignore
-  const [_, { setUser }] = useStore();
-
   return (
     <>
-      <button onClick={() => setUser(1)}>1</button>
-      <button onClick={() => setUser(2)}>2</button>
+      <button onClick={() => setSelectedUser(1)}>1</button>
+      <button onClick={() => setSelectedUser(2)}>2</button>
+      <button onClick={() => setSelectedUser(3)}>3</button>
     </>
   );
 }

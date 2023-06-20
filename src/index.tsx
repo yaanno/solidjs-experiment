@@ -2,7 +2,7 @@
 import { render } from "solid-js/web";
 import App from "./App";
 
-import { UserProvider } from "./store";
+import { UserProvider } from "./context";
 
 const root = document.getElementById("root");
 

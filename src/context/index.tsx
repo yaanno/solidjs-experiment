@@ -6,26 +6,14 @@ const UserContext = createContext();
 
 export function UserProvider(props: any): JSX.Element {
   const [currentUser, setCurrentUser] = createStore();
-  const userObj = [
-    currentUser,
-    {
-      setUser(userId: number) {
-        setCurrentUser(function (prev) {
-          return (prev = {
-            id: userId,
-            loggedIn: true,
-          });
-        });
-      },
-    },
-  ];
+
   return (
-    <UserContext.Provider value={userObj}>
+    <UserContext.Provider value={{ currentUser, setCurrentUser }}>
       {props.children}
     </UserContext.Provider>
   );
 }
 
-export function useStore() {
+export function useUserContext() {
   return useContext(UserContext);
 }

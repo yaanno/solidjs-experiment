@@ -1,10 +1,4 @@
-import {
-  createPost,
-  createUser,
-  type User,
-  type Post,
-  type UserType,
-} from "../model";
+import { createPost, createUser, type User, type Post } from "../model";
 
 export async function fetchUser(userId: number) {
   const response = await fetch(
@@ -17,14 +11,14 @@ export async function fetchUser(userId: number) {
   return createUser(user);
 }
 
-export async function fetchPosts(user: UserType) {
+export async function fetchPosts(userId: number) {
   const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
   if (!response.ok) {
     throw Error("Data fetch failed");
   }
   const posts: Post[] = await response.json();
   const filteredPosts = posts.filter(function (post) {
-    return post.userId === user.id;
+    return post.userId === userId;
   });
   return filteredPosts.map(createPost);
 }

@@ -35,12 +35,16 @@ export type UserType = ReturnType<typeof createUser>;
 export type PostType = ReturnType<typeof createPost>;
 
 export function createUser(spec: UserSpec) {
-  const { username } = spec;
+  const { username, name, email, website, id } = spec;
   function first_name() {
     return username;
   }
   return Object.freeze({
-    ...spec,
+    username,
+    name,
+    email,
+    website,
+    id,
     first_name,
   });
 }
