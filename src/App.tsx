@@ -18,7 +18,7 @@ function App() {
   // @ts-ignore
   const { currentUser, setCurrentUser } = useUserContext();
 
-  const userId = createMemo(function (): number | undefined {
+  const selectedUserId = createMemo(function (): number | undefined {
     return selectedUser();
   });
 
@@ -28,7 +28,7 @@ function App() {
     }
   });
 
-  const [user] = createResource(userId, fetchUser, {
+  const [user] = createResource(selectedUserId, fetchUser, {
     name: "userResource",
   });
 
