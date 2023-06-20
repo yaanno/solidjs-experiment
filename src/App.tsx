@@ -6,8 +6,9 @@ import {
 } from "solid-js";
 import { useUserContext } from "./context";
 import { fetchUser, fetchPosts } from "./service";
-import { unwrap } from "solid-js/store";
+import { createStore, unwrap } from "solid-js/store";
 import Page from "./page";
+import { PostType } from "./model";
 
 export const [selectedUser, setSelectedUser] = createSignal<
   number | undefined
@@ -17,6 +18,7 @@ export const [selectedUser, setSelectedUser] = createSignal<
 function App() {
   // @ts-ignore
   const { currentUser, setCurrentUser } = useUserContext();
+  const [userPosts, setUserPosts] = createStore<PostType[]>([]);
 
   const selectedUserId = createMemo(function (): number | undefined {
     return selectedUser();
@@ -34,13 +36,19 @@ function App() {
 
   const [posts] = createResource(currentUserId, fetchPosts, {
     name: "postsResource",
+    initialValue: [],
   });
 
   createEffect(() => {
-    setCurrentUser(user());
+    if (user()) {
+      setCurrentUser(user());
+    }
+    if (posts().length) {
+      setUserPosts(posts());
+    }
   });
 
-  return Page({ currentUser, posts });
+  return Page({ currentUser, userPosts });
 }
 
 export default App;
