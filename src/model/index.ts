@@ -50,7 +50,9 @@ export function createUser(spec: UserSpec) {
 }
 
 export function createPost(spec: PostSpec) {
+  const { userId, id, title, body } = spec;
   return Object.freeze({
-    ...spec,
+    title,
+    body,
   });
 }

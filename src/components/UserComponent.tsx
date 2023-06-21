@@ -8,6 +8,7 @@ interface Props {
 
 export default function (props: Props) {
   const user = () => props.user;
+  if (!user()) return null;
   const resolved = children(() => props.children);
   return (
     <div>
